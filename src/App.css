@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+  height: 100vh;
+}
+
+.ChatGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-auto-rows: 300px;
+  grid-column-gap: 10px;
+  height: 100%;
+}
+
+.ChatWindow {
+  display: flex;
+  flex-direction: column;
+}
+
+.messages {
+  overflow: auto;
+  flex: 1;
+  box-shadow: inset 0 0 10px #aaa;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  text-align: left;
+}
+
+.message-sender {
+  font-weight: bold;
+}
+
+.message-sender::after {
+  content: ": ";
+}
+
+.new-message-form {
+  height: 40px;
+  border: 1px solid #aaa;
+  border-radius: 0 0 10px 10px;
+  border-top: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.new-message-form input {
+  height: 100%;
+  border: 0;
+  padding: 5px 10px;
+  flex: 1;
+  border-radius: 0 0 0 11px;
+}
+
+.new-message-form input:focus {
+  box-shadow: inset 0 0 10px #ccf;
+}
+
+.new-message-form button {
+  appearance: none;
+  font-variant: small-caps;
+  padding: 0 10px;
+  border: 0;
+  border-left: 1px solid #aaa;
+}
+
+.new-message-form button:focus {
+  text-shadow: 0 0 4px #66a;
+  outline: none;
+}
+
+.new-message-form button:active {
+  background: #444;
+  color: #eee;
+}
