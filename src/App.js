@@ -30,7 +30,6 @@ export default class App extends Component {
       .map(t => ({ name: t.players[0].title, chatId: t.players[0].chatId }));
 
     this.setState({ playerId, chatId, otherPlayers });
-    console.log(info);
   };
 
   render() {

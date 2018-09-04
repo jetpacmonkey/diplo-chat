@@ -35,10 +35,18 @@ export default class IdInput extends Component {
     const { error, value } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
-        {error && <div className="error">{error}</div>}
-        <input value={value} onChange={this.onChange} />
-        <button type="submit">Submit</button>
+      <form onSubmit={this.onSubmit} className="IdInput">
+        <div className="IdInput-inner">
+          {error && <div className="error">{error}</div>}
+          <label htmlFor="id-input">Enter your player ID for this game:</label>
+          <input
+            id="id-input"
+            value={value}
+            onChange={this.onChange}
+            placeholder="http://gamesbyemail.com/Games/Play?<this thing here>"
+          />
+          <button type="submit">Submit</button>
+        </div>
       </form>
     );
   }

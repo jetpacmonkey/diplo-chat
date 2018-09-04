@@ -8,6 +8,46 @@
   height: 100vh;
 }
 
+.IdInput {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #eee;
+}
+
+.IdInput-inner {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 5px #aaa;
+  padding: 10px;
+  height: 60vh;
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.IdInput label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.IdInput input {
+  height: 40px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+.IdInput button {
+  height: 40px;
+  appearance: none;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
 .ChatGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
