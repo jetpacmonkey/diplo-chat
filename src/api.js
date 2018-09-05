@@ -1,7 +1,11 @@
 import _ from 'lodash';
 import jsonp from 'jsonp';
 
-const BASE_URL = `${process.env.REACT_APP_API_BASE}proxy`;
+const BASE_URL = `${
+  process.env.REACT_APP_API_BASE.startsWith('http')
+    ? ''
+    : window.location.origin
+}${process.env.REACT_APP_API_BASE}proxy`;
 
 function callGameMethod(method, args = []) {
   const cacheArg = _.uniqueId();
