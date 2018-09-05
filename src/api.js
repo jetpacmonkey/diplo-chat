@@ -1,12 +1,16 @@
 import _ from 'lodash';
 import jsonp from 'jsonp';
 
-const baseURL = 'http://gamesbyemail.com/Games/GameMethods.aspx';
+const BASE_URL = `${
+  process.env.REACT_APP_API_BASE.startsWith('http')
+    ? ''
+    : window.location.origin
+}${process.env.REACT_APP_API_BASE}proxy`;
 
 function callGameMethod(method, args = []) {
   const cacheArg = _.uniqueId();
 
-  const url = new URL(baseURL);
+  const url = new URL(BASE_URL);
   const params = {
     noCache: cacheArg,
     function: method,
