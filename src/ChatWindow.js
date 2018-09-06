@@ -28,15 +28,16 @@ export default class ChatWindow extends Component {
     sending: false,
   };
 
-  ref = React.createRef();
+  messagesRef = React.createRef();
+  inputRef = React.createRef();
 
   componentDidMount() {
-    this.ref.current.scrollTop = 99999;
+    this.messagesRef.current.scrollTop = 99999;
   }
 
   getSnapshotBeforeUpdate(prevProps) {
     if (this.props.messages.length > prevProps.messages.length) {
-      const node = this.ref.current;
+      const node = this.messagesRef.current;
       return {
         scrollHeight: node.scrollHeight,
         atBottom: node.offsetHeight + node.scrollTop >= node.scrollHeight - 10,
@@ -54,8 +55,8 @@ export default class ChatWindow extends Component {
     const { scrollHeight, atBottom = false } = snapshot;
 
     if (atBottom) {
-      this.ref.current.scrollTop +=
-        this.ref.current.scrollHeight - scrollHeight;
+      this.messagesRef.current.scrollTop +=
+        this.messagesRef.current.scrollHeight - scrollHeight;
     }
   }
 
@@ -69,7 +70,9 @@ export default class ChatWindow extends Component {
     this.props
       .sendMessage(newMessage)
       .then(() => {
-        this.setState({ newMessage: '', sending: false });
+        this.setState({ newMessage: '', sending: false }, () =>
+          this.inputRef.current.focus()
+        );
       })
       .catch(() => {
         this.setState({ sending: false });
@@ -82,7 +85,7 @@ export default class ChatWindow extends Component {
     return (
       <div className="ChatWindow">
         <h3>{name}</h3>
-        <div ref={this.ref} className="messages">
+        <div ref={this.messagesRef} className="messages">
           {messages
             .split('\n\n')
             .filter(m => m !== '')
@@ -95,6 +98,7 @@ export default class ChatWindow extends Component {
           onSubmit={this.onSubmit}
         >
           <input
+            ref={this.inputRef}
             disabled={noChat || sending}
             value={newMessage}
             onChange={e => this.setState({ newMessage: e.currentTarget.value })}
