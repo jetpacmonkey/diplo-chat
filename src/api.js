@@ -56,3 +56,7 @@ export function postChat(playerId, chatId, otherChatId, message) {
     message,
   ]);
 }
+
+export function postGlobalChat(playerId, message) {
+  return callGameMethod('GameMessage', [playerId, message]);
+}

@@ -19,6 +19,7 @@ export default class ChatWindow extends Component {
   static propTypes = {
     messages: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    noChat: PropTypes.bool.isRequired,
     sendMessage: PropTypes.func.isRequired,
   };
 
@@ -76,7 +77,7 @@ export default class ChatWindow extends Component {
   };
 
   render() {
-    const { messages, name } = this.props;
+    const { messages, name, noChat } = this.props;
     const { newMessage, sending } = this.state;
     return (
       <div className="ChatWindow">
@@ -89,14 +90,17 @@ export default class ChatWindow extends Component {
               <Message key={idx} line={m} />
             ))}
         </div>
-        <form className="new-message-form" onSubmit={this.onSubmit}>
+        <form
+          className={`new-message-form${noChat ? ' no-chat' : ''}`}
+          onSubmit={this.onSubmit}
+        >
           <input
-            disabled={sending}
+            disabled={noChat || sending}
             value={newMessage}
             onChange={e => this.setState({ newMessage: e.currentTarget.value })}
           />
-          <button type="submit" disabled={sending}>
-            Send
+          <button type="submit" disabled={noChat || sending}>
+            {sending ? <i className="loading-spinner" /> : 'Send'}
           </button>
         </form>
       </div>

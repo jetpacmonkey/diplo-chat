@@ -1,4 +1,12 @@
-* {
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -84,6 +92,7 @@
   border-radius: 0 0 10px 10px;
   border-top: 0;
   display: flex;
+  align-items: stretch;
   overflow: hidden;
 }
 
@@ -100,11 +109,15 @@
 }
 
 .new-message-form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   appearance: none;
   font-variant: small-caps;
   padding: 0 10px;
   border: 0;
   border-left: 1px solid #aaa;
+  text-align: center;
 }
 
 .new-message-form button:focus {
@@ -115,4 +128,31 @@
 .new-message-form button:active {
   background: #444;
   color: #eee;
+}
+
+.no-chat input,
+.no-chat button {
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #aaa;
+  animation: spin 1s linear infinite;
+  box-shadow: inset 0 0 0 1px #ddd;
+}
+
+.loading-spinner::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #eee;
 }

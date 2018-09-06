@@ -17,6 +17,9 @@ export default class ChatGrid extends Component {
     ).isRequired,
     fetchChat: PropTypes.func.isRequired,
     sendMessage: PropTypes.func.isRequired,
+    noChat: PropTypes.bool.isRequired,
+    groupChat: PropTypes.string.isRequired,
+    sendGroupChat: PropTypes.func.isRequired,
   };
 
   state = {
@@ -103,11 +106,17 @@ export default class ChatGrid extends Component {
   };
 
   render() {
-    const { otherPlayers } = this.props;
+    const { noChat, otherPlayers, groupChat, sendGroupChat } = this.props;
     const { responses } = this.state;
 
     return (
       <div className="ChatGrid">
+        <ChatWindow
+          name="Everyone"
+          messages={groupChat}
+          sendMessage={sendGroupChat}
+          noChat={false}
+        />
         {otherPlayers.map(
           ({ name, chatId }) =>
             responses[chatId] ? (
@@ -116,6 +125,7 @@ export default class ChatGrid extends Component {
                 name={name}
                 messages={responses[chatId].message}
                 sendMessage={message => this.sendMessage(chatId, message)}
+                noChat={noChat}
               />
             ) : (
               <ChatWindowPlaceholder key={chatId} />
